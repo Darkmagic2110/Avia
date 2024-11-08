@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time and Multiplier App</title>
+    <style>
+        body {
+            background-color: red;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: white;
+            color: red;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #ffcccc;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Time and Multiplier Generator</h1>
+    <button id="signalButton">Tap Signal</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('signalButton').addEventListener('click', function() {
+            const now = new Date();
+            const startTime = new Date(now.getTime() + 120000); // Current time + 2 minutes
+            const endTime = new Date(startTime.getTime() + 60000); // 1 minute later
+            
+            const startHours = String(startTime.getHours()).padStart(2, '0');
+            const startMinutes = String(startTime.getMinutes()).padStart(2, '0');
+            const endHours = String(endTime.getHours()).padStart(2, '0');
+            const endMinutes = String(endTime.getMinutes()).padStart(2, '0');
+
+            // Format time as HH:MM
+            const timeRange = `${startHours}:${startMinutes} - ${endHours}:${endMinutes}`;
+
+            // Random coefficient range
+            const coefficientMin = 5.00;
+            const coefficientMax = 20.00;
+            const randomCoefficient1 = (Math.random() * (coefficientMax - coefficientMin) + coefficientMin).toFixed(2);
+            const randomCoefficient2 = (Math.random() * (coefficientMax - coefficientMin) + coefficientMin).toFixed(2);
+
+            // Ensure randomCoefficient1 is less than randomCoefficient2
+            const coefficientRange = `${Math.min(randomCoefficient1, randomCoefficient2)}x to ${Math.max(randomCoefficient1, randomCoefficient2)}x`;
+
+            // Safe multiplier
+            const safeMultiplier = `${(Math.random() * (4.99 - 2.00) + 2.00).toFixed(2)}x`;
+
+            document.getElementById('result').innerHTML = `
+                Time Range: ${timeRange}<br>
+                Coefficient: ${coefficientRange}<br>
+                Safe: ${safeMultiplier}
+            `;
+        });
+    </script>
+
+</body>
+</html>
